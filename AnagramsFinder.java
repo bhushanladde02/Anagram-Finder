@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -14,7 +18,27 @@ public class AnagramsFinder {
 	
 	//Method to load the dictionary into hashset
 	public Set<String> loadDict(String filePath){
-		return null;
+		BufferedReader br = null;
+		Set<String> mapDict = new HashSet<String>();
+		try {
+			br = new BufferedReader(new FileReader(filePath));
+			String sCurrentLine;
+			while ((sCurrentLine = br.readLine()) != null) {
+				mapDict.add(sCurrentLine);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		return mapDict;
 	}
 
 	public static void main(String[] args) {
