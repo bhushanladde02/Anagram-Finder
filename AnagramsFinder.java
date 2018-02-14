@@ -119,7 +119,7 @@ public class AnagramsFinder {
 			}else{
 				System.out.println("No anagrams found for accept in "+ (enda-starta) +" ms");
 			}
-			
+			System.out.println();
 		}
 		reader.close();
 	}
