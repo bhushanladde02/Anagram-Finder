@@ -9,11 +9,20 @@ public class AnagramsFinder {
 	
 	//Method to get all anagrams
 	public Set<String> anagramsFinder(String input, Set<String> setDict){
-		return  null;
+		Set<String> result = new HashSet<String>();
+		return allAnagrams("",input,result,setDict);
 	}
 
 	public Set<String> allAnagrams(String prefix,String suffix, Set<String> result, Set<String> setDict){
-		return null;
+		if(suffix.length()== 0){
+			if(setDict.contains(prefix))
+				result.add(prefix);
+		}
+
+		for(int i = 0; i < suffix.length(); i++){
+			allAnagrams(prefix + suffix.charAt(i), suffix.substring(0,i) + suffix.substring(i+1,suffix.length()),result,setDict);
+		}
+		return result;
 	}
 	
 	//Method to load the dictionary into hashset
