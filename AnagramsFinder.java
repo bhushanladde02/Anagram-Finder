@@ -76,7 +76,7 @@ public class AnagramsFinder {
 		System.out.println("-----------------------------");
 		AnagramsFinder anagrams = new AnagramsFinder();
 		Long start = System.currentTimeMillis() % 1000;
-		Set<String> setDict = anagrams.loadDict(System.getProperty("user.dir") +"\\"+ args[0]);
+		Set<String> setDict = anagrams.loadDict(System.getProperty("user.dir") +"//"+ args[0]);
 		Long end = System.currentTimeMillis() % 1000;
 		System.out.println("Dictionary loaded in "+ (end-start) +" ms");
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
