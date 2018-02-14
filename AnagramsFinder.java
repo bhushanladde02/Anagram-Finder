@@ -86,10 +86,6 @@ public class AnagramsFinder {
 			
 			System.out.print("\nAnagramFinder> ");
 			
-			if(reader.hasNextInt()){
-				System.out.println("Only String words are allow");
-				continue;
-			}
 			
 			String input = reader.next();
 			
@@ -103,10 +99,9 @@ public class AnagramsFinder {
 			Matcher matcher = pattern.matcher(input);
 			
 			if(!matcher.matches()){
-				System.out.println("Special characters are not allowed");
+				System.out.println("Special characters and Integers are not allowed");
 				continue;
-			}
-			
+			}			
 			
 			Long starta = System.currentTimeMillis() % 1000;
 			Set<String> setresult = anagrams.anagramsFinder(input, setDict);
