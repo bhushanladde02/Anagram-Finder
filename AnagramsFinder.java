@@ -1,12 +1,19 @@
+/*
+Name : Bhushan Ladde
+Code : Anagrams Finder
+Version : 1
+*/
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.*;
 
 public class AnagramsFinder {
-	
+
 	//Method to get all anagrams
 	public Set<String> anagramsFinder(String input, Set<String> setDict){
 		Set<String> result = new HashSet<String>();
@@ -24,7 +31,7 @@ public class AnagramsFinder {
 		}
 		return result;
 	}
-	
+
 	//Method to load the dictionary into hashset
 	public Set<String> loadDict(String filePath){
 		BufferedReader br = null;
@@ -49,8 +56,22 @@ public class AnagramsFinder {
 
 		return mapDict;
 	}
+	
+	public void execute(String[] args){
+		
+		if(args.length < 1){
+			System.out.println("Please provide the dictionary.txt file as an input");
+			return;
+		}
 
-	public static void main(String[] args) {
+		if(args.length > 1){
+			System.out.println("Only one dictionary.txt file gets accepted as an input");
+			return;
+		}
+		
+		String regex = "^[a-zA-Z]+$";
+		Pattern pattern = Pattern.compile(regex);
+ 
 		System.out.println("Welcome to the Anagram Finder");
 		System.out.println("-----------------------------");
 		AnagramsFinder anagrams = new AnagramsFinder();
@@ -59,15 +80,34 @@ public class AnagramsFinder {
 		Long end = System.currentTimeMillis() % 1000;
 		System.out.println("Dictionary loaded in "+ (end-start) +" ms");
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
+		
+		
 		while(true){
+			
 			System.out.print("\nAnagramFinder> ");
+			
+			if(reader.hasNextInt()){
+				System.out.println("Only String words are allow");
+				continue;
+			}
+			
 			String input = reader.next();
-			if(input.equals("")){
+			
+			if(input == null || input.equals("")){
 				continue;
 			}
 			if(input.equals("exit")){
 				break;
 			}
+			
+			Matcher matcher = pattern.matcher(input);
+			
+			if(!matcher.matches()){
+				System.out.println("Special characters are not allowed");
+				continue;
+			}
+			
+			
 			Long starta = System.currentTimeMillis() % 1000;
 			Set<String> setresult = anagrams.anagramsFinder(input, setDict);
 			Long enda = System.currentTimeMillis() % 1000;
@@ -84,9 +124,14 @@ public class AnagramsFinder {
 			}else{
 				System.out.println("No anagrams found for accept in "+ (enda-starta) +" ms");
 			}
-			System.out.println();
+			
 		}
 		reader.close();
+	}
+	
+	public static void main(String[] args) {
+		AnagramsFinder anagrams = new AnagramsFinder();
+		anagrams.execute(args);
 	}
 
 }
