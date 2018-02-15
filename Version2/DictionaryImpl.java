@@ -1,3 +1,5 @@
+
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,15 +15,6 @@ public class DictionaryImpl implements Dictionary {
 	private Map<String,List<String>> dictionary = null;
 	private int COUNT = 0;
 
-	public Map<String, List<String>> getDictionary() {
-		return dictionary;
-	}
-
-	public void setDictionary(Map<String, List<String>> dictionary) {
-		this.dictionary = dictionary;
-	}
-
-	
 	public static Dictionary getObj() {
 		return new DictionaryImpl();
 	}
@@ -36,15 +29,21 @@ public class DictionaryImpl implements Dictionary {
 		char[] inputarray = input.toCharArray();
 		Arrays.sort(inputarray);
 		String key = new String(inputarray);
-		if(dictionary.size()!=0){
-			List<String> result = dictionary.get(key);
-			if(result!=null){
-				return result;
+		if(!isDictionaryLoaded()){
+			if(dictionary.size()!=0){
+				List<String> result = dictionary.get(key);
+				if(result!=null){
+					return result;
+				}else{
+					return new ArrayList<String>();
+				}
 			}else{
+				System.out.println(ErrorMessages.DICT_IS_EMPTY);
 				return new ArrayList<String>();
 			}
 		}else{
-			throw new DictExceptions("Please load the dictionary data");
+			throw new DictExceptions(ErrorMessages.DICT_NOT_LOADED);
+			
 		}
 
 
@@ -56,21 +55,26 @@ public class DictionaryImpl implements Dictionary {
 		char[] inputarray = input.toCharArray();
 		Arrays.sort(inputarray);
 		String key = new String(inputarray);
-		if(dictionary.size()!=0){
-			List<String> result = dictionary.get(key);
-			if(result!=null){
-				if(SortOrder.DESCENDING == order){
-					Collections.sort(result, Collections.reverseOrder());
-					return result;
+		if(!isDictionaryLoaded()){
+			if(dictionary.size()!=0){
+				List<String> result = dictionary.get(key);
+				if(result!=null){
+					if(SortOrder.DESCENDING == order){
+						Collections.sort(result, Collections.reverseOrder());
+						return result;
+					}else{
+						Collections.sort(result);
+						return result;
+					}
 				}else{
-					Collections.sort(result);
-					return result;
+					return new ArrayList<String>();
 				}
 			}else{
+				System.out.println(ErrorMessages.DICT_IS_EMPTY);
 				return new ArrayList<String>();
 			}
 		}else{
-			throw new DictExceptions("Please load the dictionary data");
+			throw new DictExceptions(ErrorMessages.DICT_NOT_LOADED);
 		}
 
 
@@ -87,7 +91,7 @@ public class DictionaryImpl implements Dictionary {
 			boolean exists = fileexist.exists();
 
 			if(!exists){
-				throw new DictExceptions("File Not Present On Given Path");
+				throw new DictExceptions(ErrorMessages.FILE_NOT_FOUND);
 			}
 
 			br = new BufferedReader(new FileReader(filepath));
@@ -123,14 +127,7 @@ public class DictionaryImpl implements Dictionary {
 
 	@Override
 	public boolean isDictionaryLoaded() {
-		if(dictionary != null){
-			return true;
-		}else{
-			return false;
-		}
+		return dictionary == null;
 	}
-
-	
-
 
 }

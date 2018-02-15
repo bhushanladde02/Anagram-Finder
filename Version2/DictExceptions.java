@@ -1,3 +1,4 @@
+
 public class DictExceptions extends Exception{
 	
 	private static final long serialVersionUID = 1L;
@@ -8,6 +9,6 @@ public class DictExceptions extends Exception{
 	}
 	
 	public String toString(){
-		return ("Exception Number =  "+exception) ;
+		return ("Exception occure : "+exception) ;
 	}
 }
