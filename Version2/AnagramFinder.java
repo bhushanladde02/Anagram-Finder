@@ -25,7 +25,7 @@ public class AnagramFinder {
 		try{
 			
 			Long start = Timer.getCurrentTimeInMiliS();
-			boolean isLoaded = dictionary.loadDictionary(System.getProperty("user.dir") +"\\"+ args[0]);
+			boolean isLoaded = dictionary.loadDictionary(System.getProperty("user.dir") +"//"+ args[0]);
 			Long end = Timer.getCurrentTimeInMiliS();
 			
 			//System.out.println("total words :" + dictionary.getWordcount());
