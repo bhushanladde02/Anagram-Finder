@@ -1,3 +1,7 @@
+/*
+Name : Bhushan Ladde
+Purpose : Interface for API Dictionary 
+*/
 import java.util.List;
 
 public interface Dictionary {

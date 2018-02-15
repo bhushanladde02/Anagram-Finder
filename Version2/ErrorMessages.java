@@ -1,3 +1,8 @@
+/*
+Name : Bhushan Ladde
+Purpose : Important Error Messages
+*/
+
 public class ErrorMessages {
 	public static String DICT_NOT_LOADED  = "Please load the dictionary data";
 	public static String FILE_NOT_FOUND  = "File is not present on the given path";

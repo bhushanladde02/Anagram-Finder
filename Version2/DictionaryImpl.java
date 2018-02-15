@@ -1,3 +1,8 @@
+/*
+Name : Bhushan Ladde
+Purpose : Dictionary interface methods implementations and the class who is handling the actual functionality 
+*/
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

@@ -1,3 +1,7 @@
+/*
+Name : Bhushan Ladde
+Purpose : To handle user define exceptions
+*/
 public class DictExceptions extends Exception{
 	
 	private static final long serialVersionUID = 1L;
