@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -6,6 +5,16 @@ import java.util.Scanner;
 public class AnagramFinder {
 
 	public static void execute(String[] args){
+		
+		if(args.length < 1){
+			System.out.println(ErrorMessages.PROVIDE_FILE_INPUT);
+			return;
+		}
+
+		if(args.length > 1){
+			System.out.println(ErrorMessages.ONLY_ONE_PARAMETER_AS_AN_INPUT);
+			return;
+		}
 		
 		Dictionary dictionary = DictionaryImpl.getObj();
 		
@@ -75,12 +84,12 @@ public class AnagramFinder {
 				
 			}else{
 				System.out.println(ErrorMessages.DICT_NOT_LOADED);
-				
 			}
 			
 		}catch(DictExceptions e){
 			System.out.println(e);
 		}
+		System.out.println("Bye!!!!");
 		System.exit(0);
 		System.gc();
 	}
